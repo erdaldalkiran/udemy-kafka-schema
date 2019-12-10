@@ -28,7 +28,7 @@ public class SchemaEvolutionExamples {
                 .build();
         System.out.println("Customer V1 = " + customerV1.toString());
 
-        // write it out to a file
+        // write it out to a file using V1 schema
         final DatumWriter<CustomerV1> datumWriter = new SpecificDatumWriter<>(CustomerV1.class);
         final DataFileWriter<CustomerV1> dataFileWriter = new DataFileWriter<>(datumWriter);
         dataFileWriter.create(customerV1.getSchema(), new File("customerV1.avro"));
@@ -51,7 +51,7 @@ public class SchemaEvolutionExamples {
 
         // let's test a forward compatible read
 
-        // we deal with the V1 of our customer
+        // we deal with the V2 of our customer
         CustomerV2 customerv2 = CustomerV2.newBuilder()
                 .setAge(25)
                 .setFirstName("Mark")
@@ -71,7 +71,7 @@ public class SchemaEvolutionExamples {
         dataFileWriterV2.close();
         System.out.println("successfully wrote customerV2.avro");
 
-        // we read it using the v2 schema
+        // we read it using the V1 schema
         System.out.println("Reading our customerV2.avro with v1 schema");
         final File file2 = new File("customerV2.avro");
         final DatumReader<CustomerV1> datumReader = new SpecificDatumReader<>(CustomerV1.class);
