@@ -14,7 +14,7 @@ public class KafkaAvroJavaConsumerV2Demo {
 
     public static void main(String[] args) {
         Properties properties = new Properties();
-        // normal consumer
+        // normal consumer 
         properties.setProperty("bootstrap.servers","127.0.0.1:9092");
         properties.put("group.id", "customer-consumer-group-v2");
         properties.put("auto.commit.enable", "false");
